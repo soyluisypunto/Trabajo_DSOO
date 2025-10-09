@@ -17,66 +17,40 @@ public class Videojuego3 {
         tabla.mostrarTablero();
 
       
-        System.out.println("\n--- Soldados del Ejército 1 ---");
+        System.out.println("\n--- Soldados del Ejército 1 (A)---");
         for (int i = 0; i < ejercito1.size(); i++) {
             System.out.println(i + ".- " + ejercito1.get(i));
         }
 
-        System.out.println("\n--- Soldados del Ejército 2 ---");
+        System.out.println("\n--- Soldados del Ejército 2 (B)---");
         for (int i = 0; i < ejercito2.size(); i++) {
             System.out.println(i + ".- " + ejercito2.get(i));
         }
+        int turno= (int) ((Math.random()*2)+1);
+        while(!tabla.ejercitoVacio(ejercito1) && !tabla.ejercitoVacio(ejercito2)){
+            System.out.println();
+            System.out.println("-----Turno del ejercito ("+turno+")-----");
+            tabla.mostrarTablero();
+            System.out.println("Ingrese la fila del soldado a mover (0-9)");
+            int fila=sc.nextInt();
+            System.out.println("Ingrese la columna del soldado a mover (0-9)");
+            int columna=sc.nextInt();
 
+            System.out.println("Ingrese dirección (arriba,abajo,derecha,izquierda)");
+            String movimiento=sc.next().toLowerCase();
 
-        System.out.print("\nSeleccione un ejército (1 o 2): ");
-        int opcionEjercito = sc.nextInt();
+            tabla.moverSoldado(turno,fila,columna,movimiento,sc);
 
-        ArrayList<Soldado> ejercitoSeleccionado= null;
-
-        if(opcionEjercito==1){
-            ejercitoSeleccionado = ejercito1;
-        }else if(opcionEjercito==2){
-            ejercitoSeleccionado = ejercito2;
-        }else{
-            System.out.println("El ejercito que escogiste no existe");
-        }
-
-        System.out.print("Seleccione el número del soldado: ");
-        int num_soldado = sc.nextInt();
-
-        Soldado elegido = ejercitoSeleccionado.get(num_soldado);
-
-        Acciones accion = new Acciones(elegido);
-
-        int opcion;
-        do {
-            System.out.println("\nAcciones para " + elegido.getNombre() + ":");
-            System.out.println("1. Atacar");
-            System.out.println("2. Defender");
-            System.out.println("3. Avanzar");
-            System.out.println("4. Retroceder");
-            System.out.println("5. Recibir daño");
-            System.out.println("6. Huir");
-            System.out.println("0. Salir");
-            System.out.print("Elija una opción: ");
-            opcion = sc.nextInt();
-
-            switch (opcion) {
-                case 1 : accion.atacar(); break;
-                case 2 : accion.defender(); break;
-                case 3 : accion.avanzar(); break;
-                case 4 : accion.retroceder(); break;
-                case 5 : {
-                    System.out.print("Ingrese cantidad de daño: ");
-                    int dano = sc.nextInt();
-                    accion.recibirDanio(dano); break;
-                }
-                case 6 : accion.huir(); break;
-                case 0 : System.out.println("Saliendo..."); break;
-                default : System.out.println("Opción inválida");
+            if(turno==1){
+                turno=2;
+            }else{
+                turno=1;
             }
-        } while (opcion != 0);
-
+        }
+        if (tabla.ejercitoVacio(ejercito1))
+            System.out.println("Gana el ejercito 2");
+        else
+            System.out.println("Gana el ejercito 1");
         sc.close();
     }
 }

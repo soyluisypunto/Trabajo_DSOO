@@ -27,6 +27,15 @@ public Soldado(String nombre, int vida, int fila , int columna, int ejercito){
     public int getEjercito() {
         return ejercito;
     }
+    public void setColumna(int columna){
+        this.columna=columna;
+    }
+    public void setFila(int fila){
+        this.fila=fila;
+    }
+    public void setVida(int vida){
+        this.vida=vida;
+    }
     public String toString() {
     return nombre + " (vida=" + vida + ", fila=" + fila + ", col=" + columna + ")";
     }
