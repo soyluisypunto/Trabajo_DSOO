@@ -164,45 +164,36 @@ public class crear_tablero{
         }
     }
     public void batalla(Soldado s1, Soldado s2, int fila, int col,Scanner sc){
-        Acciones accion1 = new Acciones(s1);
-        Acciones accion2 = new Acciones(s2);
-         System.out.println("Batalla entre " + s1.getNombre() + " y " + s2.getNombre());
-         boolean fin=false;
-        while(!fin) {
-            System.out.println("\nAcciones para " + s1.getNombre() + ":");
-            System.out.println("1. Atacar");
-            System.out.println("2. Defender");
-            System.out.println("3. Avanzar");
-            System.out.println("4. Retroceder");
-            System.out.println("5. Huir");
-            System.out.print("Elija una opción: ");
-            int opcion = sc.nextInt();
-
-            switch (opcion) {
-                case 1 : System.out.println("Ingrese la cantidad de daño que va hacer (1-5)");
-                int dano=sc.nextInt();
-                accion1.atacar();accion2.recibirDanio(dano);break;
-                case 2 : accion1.defender();fin=true;break;
-                case 3 : accion1.avanzar();fin=true; break;
-                case 4 : accion1.retroceder();fin=true; break;
-                case 5 : accion1.huir();fin=true;break;
-                default : System.out.println("Opción inválida");return;
-            }
-        }
-        if (!accion1.vive()) {
+        int suma_vida= s1.getVida() + s2.getVida();
+        int numero_aleatorio1, numero_aleatorio2;
+        double porcentaje1, porcentaje2;
+        do{
+            numero_aleatorio1= (int) ((Math.random()*suma_vida)+1);
+            numero_aleatorio2= suma_vida - numero_aleatorio1;
+        }while(numero_aleatorio1 == numero_aleatorio2);
+            porcentaje1 = ((double) numero_aleatorio1 / suma_vida) * 100;
+            porcentaje2 = ((double) numero_aleatorio2 / suma_vida) * 100;
+        System.out.println("------Numeros Aleatorios:------");
+        System.out.println("El soldado "+s1.getNombre()+": "+numero_aleatorio1);
+        System.out.println("El soldado "+s2.getNombre()+": "+numero_aleatorio2);
+        System.out.println("------Probabilidades de ganar------");
+        System.out.println("El soldado "+s1.getNombre()+": "+porcentaje1);
+        System.out.println("El soldado "+s2.getNombre()+": "+porcentaje2);
+        if (porcentaje1>porcentaje2) {
+            System.out.println("Por lo tanto el soldado "+s1.getNombre()+" gana");
+            s1.setVida(s1.getVida()+1);
+            tablero.get(s2.getFila()).set(s2.getColumna(), s1);
             tablero.get(s1.getFila()).set(s1.getColumna(), null);
-            System.out.println(s1.getNombre() + " ha muerto.");
-        } else {
-            s1.setVida(accion1.getvida_actual());
-        }
-
-        if (!accion2.vive()) {
-            tablero.get(fila).set(col, null);
             System.out.println(s2.getNombre() + " ha muerto.");
+            s2.setVida(0);
         } else {
-            s2.setVida(accion2.getvida_actual());
+            System.out.println("Por lo tanto el soldado "+s2.getNombre()+" gana");
+            s2.setVida(s2.getVida()+1);
+            tablero.get(s1.getFila()).set(s1.getColumna(), s2);
+            tablero.get(s2.getFila()).set(s2.getColumna(), null);
+            System.out.println(s1.getNombre() + " ha muerto.");
+            s1.setVida(0);
         }
-
         System.out.println("Batalla finalizada.\n");
         }
 }
