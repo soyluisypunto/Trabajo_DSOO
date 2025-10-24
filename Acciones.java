@@ -25,6 +25,18 @@ public class Acciones {
     public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
     }
+    public int getNivelAtaque(){
+        return nivelAtaque;
+    }
+    public void setNivelAtaque(int nivelAtaque){
+        this.nivelAtaque= nivelAtaque;
+    }
+    public int getNivelDefensa(){
+        return nivelDefensa;
+    }
+    public void setNivelDefensa(int nivelDefensa){
+        this.nivelDefensa= nivelDefensa;
+    }
 
     public Acciones(Soldado soldado) {
         this.soldado = soldado;
