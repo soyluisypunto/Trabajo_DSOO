@@ -39,5 +39,7 @@ public Soldado(String nombre, int vida, int fila , int columna, int ejercito){
     public String toString() {
     return nombre + " (vida=" + vida + ", fila=" + fila + ", col=" + columna + ")";
     }
+    public void habilidad_particular() {
+    }
 }
 
