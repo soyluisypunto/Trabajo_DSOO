@@ -27,7 +27,29 @@ public class crear_tablero{
                 fila = (int)(Math.random() * tamano);
                 columna = (int)(Math.random() * tamano);
             } while (tablero.get(fila).get(columna) != null);
-            Soldado s = new Soldado(nombre, vida, fila, columna, idEjercito);
+
+            int tipo = (int)(Math.random() * 4); // 0=Espadachin, 1=Arquero, 2=Caballero, 3=Lancero
+            Soldado s;
+
+            switch (tipo) {
+                case 0: // Espadachin
+                    vida = (int)(Math.random() * 2) + 3; 
+                    s = new Espadachin("Espadachin " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 10 + 20));
+                    break;
+                case 1: // Arquero
+                    vida = (int)(Math.random() * 3) + 1; 
+                    s = new Arquero("Arquero " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 5 + 5));
+                    break;
+                case 2: // Caballero
+                    vida = (int)(Math.random() * 3) + 3;
+                    String arma = (Math.random() > 0.5) ? "Espada larga" : "Lanza corta";
+                    s = new Caballero("Caballero " + i + prefijo, vida, fila, columna, idEjercito, arma);
+                    break;
+                default: // Lancero
+                    vida = (int)(Math.random() * 2) + 1; 
+                    s = new Lancero("Lancero " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 15 + 10));
+                    break;
+                }
 
             tablero.get(fila).set(columna, s);
             
