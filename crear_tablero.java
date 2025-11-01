@@ -33,21 +33,21 @@ public class crear_tablero{
 
             switch (tipo) {
                 case 0: // Espadachin
-                    vida = (int)(Math.random() * 2) + 3; 
-                    s = new Espadachin("Espadachin " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 10 + 20));
+                    vida = (int)(Math.random() * 3) + 8; 
+                    s = new Espadachin("Espadachin " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 10 + 20),10,8);
                     break;
                 case 1: // Arquero
-                    vida = (int)(Math.random() * 3) + 1; 
-                    s = new Arquero("Arquero " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 5 + 5));
+                    vida = (int)(Math.random() * 3) + 3; 
+                    s = new Arquero("Arquero " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 5 + 5),7,3);
                     break;
                 case 2: // Caballero
-                    vida = (int)(Math.random() * 3) + 3;
+                    vida = (int)(Math.random() * 3) + 10;
                     String arma = (Math.random() > 0.5) ? "Espada larga" : "Lanza corta";
-                    s = new Caballero("Caballero " + i + prefijo, vida, fila, columna, idEjercito, arma);
+                    s = new Caballero("Caballero " + i + prefijo, vida, fila, columna, idEjercito, arma,13,7);
                     break;
                 default: // Lancero
-                    vida = (int)(Math.random() * 2) + 1; 
-                    s = new Lancero("Lancero " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 15 + 10));
+                    vida = (int)(Math.random() * 4) + 5; 
+                    s = new Lancero("Lancero " + i + prefijo, vida, fila, columna, idEjercito, (int)(Math.random() * 15 + 10),5,10);
                     break;
                 }
 

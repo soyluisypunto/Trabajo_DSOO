@@ -4,13 +4,17 @@ public class Soldado {
     private int fila;
     private int columna;
     private int ejercito;
+    private int nivelAtaque;
+    private int nivelDefensa;
 
-public Soldado(String nombre, int vida, int fila , int columna, int ejercito){
+public Soldado(String nombre, int vida, int fila , int columna, int ejercito, int nivelAtaque, int nivelDefensa){
     this.nombre=nombre;
     this.vida=vida;
     this.fila=fila;
     this.columna=columna;
     this.ejercito=ejercito;
+    this.nivelAtaque= nivelAtaque;
+    this.nivelDefensa= nivelDefensa;
     }
     public String getNombre(){
     return nombre;
@@ -37,9 +41,21 @@ public Soldado(String nombre, int vida, int fila , int columna, int ejercito){
         this.vida=vida;
     }
     public String toString() {
-    return nombre + " (vida=" + vida + ", fila=" + fila + ", col=" + columna + ")";
+    return nombre + " (vida=" + vida + ", fila=" + fila + ", col=" + columna + ", nivelAtaque "+ nivelAtaque+ ", nivelDefensa "+nivelDefensa+" )";
     }
     public void habilidad_particular() {
+    }
+    public int getNivelAtaque(){
+        return nivelAtaque;
+    }
+    public void setNivelAtaque(int nivelAtaque){
+        this.nivelAtaque= nivelAtaque;
+    }
+    public int getNivelDefensa(){
+        return nivelDefensa;
+    }
+    public void setNivelDefensa(int nivelDefensa){
+        this.nivelDefensa= nivelDefensa;
     }
 }
 

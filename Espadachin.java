@@ -1,7 +1,7 @@
 public class Espadachin extends Soldado{
     private int Longitud_Espada;
-    public Espadachin(String nombre, int vida, int fila , int columna, int ejercito, int Longitud_Espada){
-        super(nombre, vida, fila, columna, ejercito);
+    public Espadachin(String nombre, int vida, int fila , int columna, int ejercito, int Longitud_Espada, int nivelAtaque, int nivelDefensa){
+        super(nombre, vida, fila, columna, ejercito, nivelAtaque, nivelDefensa);
         this.Longitud_Espada= Longitud_Espada;
     }
      public int getLongitudEspada() {

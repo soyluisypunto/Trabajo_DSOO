@@ -25,24 +25,10 @@ public class Acciones {
     public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
     }
-    public int getNivelAtaque(){
-        return nivelAtaque;
-    }
-    public void setNivelAtaque(int nivelAtaque){
-        this.nivelAtaque= nivelAtaque;
-    }
-    public int getNivelDefensa(){
-        return nivelDefensa;
-    }
-    public void setNivelDefensa(int nivelDefensa){
-        this.nivelDefensa= nivelDefensa;
-    }
-
+    
     public Acciones(Soldado soldado) {
         this.soldado = soldado;
-        this.nivelAtaque = 5; // Valor predeterminado
-        this.nivelDefensa = 5; // Valor predeterminado
-        this.velocidad = 0; // Valor predeterminado
+        this.velocidad = 0; 
         this.vive = true;
         this.vida_actual = soldado.getVida(); // Vida inicial
         this.actitud = "neutral"; // Actitud inicial
