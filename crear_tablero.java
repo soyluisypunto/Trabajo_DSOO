@@ -1,9 +1,13 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class crear_tablero{
+public class crear_tablero implements Serializable{
     private final int tamano = 10;
     private ArrayList<ArrayList<Soldado>> tablero = new ArrayList<>();
 
+    public ArrayList<ArrayList<Soldado>> getTablero() {
+        return tablero;
+    }
     public void inicializarTablero() {
         for (int i = 0; i < tamano; i++) {
             ArrayList<Soldado> fila = new ArrayList<>();
