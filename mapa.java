@@ -1,6 +1,7 @@
 import java.util.*;
+import java.io.Serializable;
 
-public class mapa {
+public class mapa implements Serializable{
     private crear_tablero tablero;
     private String territorio;
     private String reino1;
@@ -166,5 +167,8 @@ public class mapa {
         System.out.println("Arqueros: " + arquero);
         System.out.println("Caballeros: " + caballero);
         System.out.println("Lanceros: " + lancero);
+    }
+    public crear_tablero getTablero() {
+    return tablero;
     }
 }
