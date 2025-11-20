@@ -1,4 +1,5 @@
-public class Soldado {
+import java.io.Serializable;
+public class Soldado implements Serializable {
     private String nombre;
     private int vida;
     private int fila;
