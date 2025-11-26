@@ -1,0 +1,3 @@
+Volumen=70
+Dificultad=Media
+Pantalla=1350x700
