@@ -106,6 +106,31 @@ public class mapa implements Serializable{
             System.out.println("Empate.");
         }
     }
+    public void mostrarResumenTableroJFRAME() {
+        System.out.println("\n--- Ejercito " + reino1 + " ---");
+        mostrarEjercitoArreglo(ejercito1, 1);
+
+        System.out.println("\n--- Ejercito " + reino2 + " ---");
+        tablero.mostrarOrdenCreacion(ejercito2, 2);
+
+        // Resumen de batalla
+        System.out.println("\n--- Resumen de Batalla ---");
+        int total1 = sumarVidaEjercito(ejercito1);
+        int total2 = sumarVidaEjercito(ejercito2);
+        double porcentaje1 = (double) total1 / (total1 + total2) * 100;
+        double porcentaje2 = (double) total2 / (total1 + total2) * 100;
+
+        System.out.println("Ejercito 1: " + reino1 + ": " + total1 + " " + String.format("%.2f", porcentaje1) + "% de probabilidad de victoria");
+        System.out.println("Ejercito 2: " + reino2 + ": " + total2 + " " + String.format("%.2f", porcentaje2) + "% de probabilidad de victoria");
+
+        if (total1 > total2) {
+            System.out.println("El ganador es el ejército 1 de: " + reino1 + ".");
+        } else if (total2 > total1) {
+            System.out.println("El ganador es el ejército 2 de: " + reino2 + ".");
+        } else {
+            System.out.println("Empate.");
+        }
+    }
 
     private void mostrarEjercitoArreglo(Soldado[] ejercito, int id) {
         System.out.println("Ejercito número " + id);
