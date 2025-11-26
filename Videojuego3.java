@@ -2,17 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+
 
 public class Videojuego3 {
     static mapa juego;
 
     public static void main(String[] args) {
         JFrame ventana = new JFrame("VIDEOJUEGO");
-        ventana.setSize(800, 900);
+        ventana.setSize(1350, 700);
+        ventana.setLocationRelativeTo(null);
         ventana.setLayout(new BorderLayout());
 
         // ------ Menú ------
@@ -20,13 +29,21 @@ public class Videojuego3 {
         JMenu archivo = new JMenu("Archivo");
         JMenuItem nuevo = new JMenuItem("Nuevo");
         JMenuItem abrir = new JMenuItem("Abrir");
+        JMenuItem abrir_logs = new JMenuItem("Abrir logs");
         JMenuItem guardar = new JMenuItem("Guardar");
+        JMenuItem guardar_logs = new JMenuItem("Guardar logs");
+        JMenuItem guardar_ranking = new JMenuItem("Guardar Ranking");
+        JMenuItem guardar_configuracion = new JMenuItem("Guardar Configuración");
         JMenuItem salir = new JMenuItem("Salir");
 
         archivo.add(nuevo);
          archivo.add(abrir);
-          archivo.add(guardar);
-           archivo.add(salir);
+          archivo.add(abrir_logs);
+           archivo.add(guardar);
+            archivo.add(guardar_logs);
+             archivo.add(guardar_ranking);
+              archivo.add(guardar_configuracion);
+               archivo.add(salir);
 
         JMenu ver = new JMenu("Ver");
         JMenuItem mostrar_consola = new JMenuItem("Mostrar Consola");
@@ -47,12 +64,12 @@ public class Videojuego3 {
         ventana.add(panelTablero, BorderLayout.CENTER);
 
         // Consola
-        JTextArea consola = new JTextArea(8, 0); // altura 8 filas
+        JTextArea consola = new JTextArea(8, 80); 
         consola.setEditable(false);
         consola.setFont(new Font("Consolas", Font.PLAIN, 14));
         JScrollPane tamaño_ilimitado = new JScrollPane(consola);
         tamaño_ilimitado.setVisible(false);
-        ventana.add(tamaño_ilimitado, BorderLayout.SOUTH);
+        ventana.add(tamaño_ilimitado, BorderLayout.EAST);
 
         // Mostrar/ocultar consola
         mostrar_consola.addActionListener(e -> {
@@ -97,10 +114,9 @@ public class Videojuego3 {
 
             crearTableroGrafico(panelTablero, juego);
 
-            System.out.println("Ejércitos generados.");
-            juego.mostrarTablero();
+            System.out.println("Ejercitos generados.");
             juego.mostrarDistribucion();
-            juego.mostrarResumen();
+            juego.mostrarResumenTableroJFRAME();
 
             panelTablero.revalidate();
             panelTablero.repaint();
@@ -161,6 +177,89 @@ public class Videojuego3 {
                 }
             }
         });
+        // Guardar logs
+        guardar_logs.addActionListener(e -> {
+            try (PrintWriter pw = new PrintWriter(new BufferedWriter(
+                    new FileWriter("Guardado/logs.txt", true)))) {
+
+                pw.println("Se creó una nueva partida.");
+                pw.println("Fecha: " + new java.util.Date());
+                pw.println("----------------------------------");
+
+                JOptionPane.showMessageDialog(ventana, "Logs guardados correctamente.");
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(ventana, "Error al guardar logs.");
+            }
+        });
+
+        //Guardar Rankings
+        guardar_ranking.addActionListener(e -> {
+            try (PrintWriter pw = new PrintWriter(new BufferedWriter(
+                    new FileWriter("Guardado/ranking.txt")))) {
+
+                pw.println("RANKING DE JUGADORES");
+                pw.println("1. Reino A - 1500 puntos");
+                pw.println("2. Reino B - 1200 puntos");
+
+                JOptionPane.showMessageDialog(ventana, "Ranking guardado correctamente.");
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(ventana, "Error al guardar ranking.");
+            }
+        });
+        // Guardar Configuración
+        guardar_configuracion.addActionListener(e -> {
+            try (PrintWriter pw = new PrintWriter(new BufferedWriter(
+                    new FileWriter("Guardado/configuracion.txt")))) {
+
+                pw.println("Volumen=70");
+                pw.println("Dificultad=Media");
+                pw.println("Pantalla=1350x700");
+
+                JOptionPane.showMessageDialog(ventana, "Configuración guardada correctamente.");
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(ventana, "Error al guardar configuración.");
+            }
+        });
+        // Abrir logs
+        abrir_logs.addActionListener(e -> {
+            String ruta = "C:\\Users\\Marisol\\OneDrive\\Escritorio\\Trabajo_DSOO\\Guardado";
+
+            File carpeta = new File(ruta);
+            File[] archivos = carpeta.listFiles();
+
+            StringBuilder sb = new StringBuilder();
+
+            if (archivos != null) {
+                for (File archivo_1 : archivos) {
+                    if (archivo_1.getName().endsWith(".txt")) {
+                        sb.append("===== ").append(archivo_1.getName()).append(" =====\n");
+                        try (BufferedReader br = new BufferedReader(new FileReader(archivo_1))) {
+                            String linea;
+                            while ((linea = br.readLine()) != null) {
+                                sb.append(linea).append("\n");
+                            }
+                        } catch (Exception ex) {
+                            sb.append("Error al leer el archivo.\n");
+                        }
+                        sb.append("\n");
+                    }
+                }
+            }
+
+            JTextArea area = new JTextArea(sb.toString(), 18, 50);
+            area.setEditable(false);
+            JScrollPane scroll = new JScrollPane(area);
+
+            JOptionPane.showMessageDialog(ventana,scroll,"Todos los archivos de Guardados",JOptionPane.INFORMATION_MESSAGE
+            );
+        });
+
+
+
+
 
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setVisible(true);
